@@ -1,6 +1,6 @@
 baseURL: https://example.org/
 languageCode: en-us
-title: School of Linux
+title: linux thoughts
 theme: ["PaperMod"]
 
 
@@ -50,23 +50,25 @@ outputs:
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   description: "Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"
-  author: Theme PaperMod
+  # author: Theme PaperMod
   # author: ["Me", "You"] # multiple authors
-
+  hideAuthor: true
   defaultTheme: auto
   # disableThemeToggle: true
+  # don't turn headings into links
+  disableAnchoredHeadings: true
   ShowShareButtons: true
   ShareButtons: ["facebook", "reddit", "linkedin", "twitter"]
-  ShowReadingTime: true
+  ShowReadingTime: false
   # disableSpecial1stPost: true
   displayFullLangName: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowRssButtonInSectionTermList: true
-  ShowAllPagesInArchive: true
+  ShowAllPagesInArchive: false
   ShowPageNums: true
-  ShowToc: true
+  ShowToc: false
   # comments: false
   images: ["images/papermod-cover.png"]
 
@@ -86,7 +88,7 @@ params:
   homeInfoParams:
     Title: "The Linux School's Website"
     Content: >
-      Welcome to my website. Here I intend to post tutorials as well as opinion articles on certain things in the Linux community.
+      Welcome! Here I intend to post tutorials as well as opinion articles on certain things in the Linux community.
 
   socialIcons:
     - name: github
