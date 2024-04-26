@@ -1,5 +1,5 @@
 +++
-title = 'Why Is Gnome Still Popular'
+title = 'Why Is Gnome Still Popular?'
 date = 2024-04-25T17:34:22-04:00
 draft = true
 +++
