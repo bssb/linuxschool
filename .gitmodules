@@ -7,3 +7,7 @@
 [submodule "themes/Lowkey"]
 	path = themes/Lowkey
 	url = https://github.com/nixentric/Lowkey-Hugo-Theme
+[submodule "themes/congo"]
+	path = themes/congo
+	url = https://github.com/jpanther/congo.git
+	branch = stable
