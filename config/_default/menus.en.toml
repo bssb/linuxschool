@@ -3,7 +3,7 @@
 # Acceptable parameters are name, pageRef, page, url, title, weight.
 #
 # The simplest menu configuration is to provide:
-#   name = The name to be displayed for this menu link
+#   name = The name to be displayed for this menu linkabout:blank#blocked
 #   pageRef = The identifier of the page or section to link to
 #
 # By default the menu is ordered alphabetically. This can be
@@ -24,6 +24,11 @@
   name = "Tags"
   pageRef = "tags"
   weight = 30
+
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 40
 
 [[main]]
   identifier = "search"
