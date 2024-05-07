@@ -3,7 +3,7 @@ title = 'Tracking Down Unneeded Dependencies With pacgraph'
 date = 2024-04-24T06:35:38-04:00
 draft = false
 +++
-
+ 
 I was disappointed when this package was moved out of the official repositories. Maybe it was because their repository didn't provide a license? Or because the developer was MIA. Anyways, you can still install it from the AUR:
 {{< highlight bash >}}
 paru -S pacgraph
