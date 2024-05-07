@@ -1,7 +1,7 @@
 +++
 title = 'Why I Stopped Using NixOS'
 date = 2024-04-23T17:55:58-04:00
-draft = false
+draft = true
 +++
 
 In my opinion NixOS is a poor choice for desktop Linux and here I will explain why.
