@@ -1,21 +1,27 @@
 +++
-title = 'Tracking Down Unneeded Dependencies With pacgraph'
+title = 'Identifying unused dependencies with pacgraph'
 date = 2024-04-24T06:35:38-04:00
 draft = false
 +++
- 
-I was disappointed when this package was moved out of the official repositories. Maybe it was because their repository didn't provide a license? Or because the developer was MIA. Anyways, you can still install it from the AUR:
+
+Pacgraph provides a graph of your system's package dependencies. You can find it in the AUR:
 {{< highlight bash >}}
 paru -S pacgraph
 {{< / highlight >}}
 
-It's incredibly useful for finding packages that I had no idea were installed. After you've removed a few packages, you can run use this one-liner to remove any orphaned dependencies:
+It's helped identify packages that I had no idea were installed. 
+
+{{< highlight bash >}}
+sudo pacman -R packages_to_remove
+{{< / highlight >}}
+
+After you've removed a few packages, you can run use this one-liner to remove any orphaned dependencies:
 
 {{< highlight bash >}}
 sudo pacman -Rns $(pacman -Qtdq)
 {{< / highlight >}}
 
-Or my script that includes error checking in case there are no orphans:
+Or my script remove_orphans.sh that includes error checking in case there are no orphans:
 
 {{< highlight bash >}}
 #!/bin/bash

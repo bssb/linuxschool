@@ -11,7 +11,7 @@ This guide will cover setting up a borg repository, creating backups, and also s
 You should have a separate repository for each system you intend to back up. Borg documentation indicates that it's possible to share a repository with multiple hosts, but not recommended.
 
 {{< highlight bash >}}
-$ sudo borg init --encryption=none /backup/borg-hostname
+sudo borg init --encryption=none /backup/borg-hostname
 {{< / highlight >}}
 
 ## Create an archive
@@ -48,8 +48,8 @@ borg-p is the name of my repository and p-2024-04-29 is the archive I created in
 You have to cd into the target directory, there's no borg option to specify it.
 
 ```
-$ cd /mnt/test
-$ sudo borg extract /backup/borg-p::p-2024-04-29
+cd /mnt/test
+sudo borg extract /backup/borg-p::p-2024-04-29
 ```
 
 Now it's important to edit /mnt/test/etc/fstab and update the UUID of the root filesystem to the new partition.
@@ -64,7 +64,7 @@ I'm actually not going to be using the one-line script I wrote in the previous s
 
 To generate the default borgmatic config files, run:
 ```
-$ sudo borgmatic config generate
+sudo borgmatic config generate
 ```
 
 That generates a rather long config however, and most of the sections aren't needed.
@@ -91,16 +91,16 @@ patterns:
 
 You can run borgmatic manually to create an archive:
 ```
-$ sudo borgmatic create
+sudo borgmatic create
 ```
 
 or set up a systemd timer to run at intervals:
 ```
-$ sudo systemctl enable borgmatic.timer
+sudo systemctl enable borgmatic.timer
 ```
 By default this is run daily. You can change the interval by editing the timer:
 ```
-$ sudo systemctl edit borgmatic.timer
+sudo systemctl edit borgmatic.timer
 ```
 
 ## Resources
