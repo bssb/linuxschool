@@ -17,6 +17,8 @@ enableImageWebp = true
 # robots = ""
 fingerprintAlgorithm = "sha256"
 
+mainSections = ['posts']
+
 [header]
   layout = "basic" # valid options: basic, hamburger, hybrid, custom
   #logo = "images/logo.jpg"
