@@ -1,27 +1,29 @@
 +++
 title = 'Identifying unused dependencies with pacgraph'
 date = 2024-04-24T06:35:38-04:00
+cover = 'pacgraph.svg'
+coverCaption = "My system's dependencies at the time of writing this"
 draft = false
 +++
 
-Pacgraph provides a graph of your system's package dependencies. You can find it in the AUR:
+Pacgraph provides a graph of your Arch Linux system's package dependencies. You can install it from the AUR:
 {{< highlight bash >}}
 paru -S pacgraph
 {{< / highlight >}}
 
-It's helped identify packages that I had no idea were installed. 
+It's helped identify packages that I had no idea were installed. After identifying the ones you don't need, you can remove them:
 
 {{< highlight bash >}}
 sudo pacman -R packages_to_remove
 {{< / highlight >}}
 
-After you've removed a few packages, you can run use this one-liner to remove any orphaned dependencies:
+After you've removed a few packages, you can run use this one-liner to remove any orphaned packages. An orphan is a package that was installed as a dependency of something that you already removed.
 
 {{< highlight bash >}}
 sudo pacman -Rns $(pacman -Qtdq)
 {{< / highlight >}}
 
-Or my script remove_orphans.sh that includes error checking in case there are no orphans:
+Or my script remove_orphans.sh which includes a bit of error handling:
 
 {{< highlight bash >}}
 #!/bin/bash
