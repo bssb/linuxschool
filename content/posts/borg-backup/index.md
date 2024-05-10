@@ -1,6 +1,7 @@
 +++
 title = 'Automated system backups with borg and borgmatic'
 date = 2024-05-08T18:17:13-04:00
+tags = ['backup']
 draft = true
 +++
 

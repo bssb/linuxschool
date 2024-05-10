@@ -1,6 +1,7 @@
 +++
 title = 'Identifying unused dependencies with pacgraph'
 date = 2024-04-24T06:35:38-04:00
+tags = ['arch']
 cover = 'pacgraph.svg'
 coverCaption = "My system's dependencies at the time of writing this"
 draft = false
@@ -36,15 +37,12 @@ else
 fi
 {{< / highlight >}}
 
-And then you can run pacgraph a second time after removing some packages, it will show other packages that it didn't previously have room for.
+And then you can run pacgraph a second time after removing some packages, it will show other packages that it didn't previously have room for. If you've ever made the mistake like I have of installing a package group such as kde-applications, then you'll know that it installs a whole lot of junk that you don't want. You might have to run pacgraph a few times before you can locate everything that is unneeded.
+
 
 I use this bash alias to quickly run it:
 {{< highlight bash >}}
 alias pg='pacgraph -f /tmp/pacgraph && feh /tmp/pacgraph.svg'
 {{< / highlight >}}
 
-That can go in your ~/.bashrc or wherever else your aliases are stored. Mine looks like this:
-
-[![Dependency graph](pacgraph.svg)](pacgraph.svg)
-
-I made the mistake of installing kde-applications when switching to Plasma 6, so now I have a lot of packages to remove.
+That can go in your ~/.bashrc or wherever else your aliases are stored.
