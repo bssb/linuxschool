@@ -2,22 +2,23 @@
 title = 'Automated system backups with borg and borgmatic'
 date = 2024-05-08T18:17:13-04:00
 tags = ['backup']
-draft = true
+draft = false
 +++
 
-This guide will cover setting up a borg repository, creating backups, and also show how to run them automatically.
+This article will cover the basics of setting up a borg repository, creating backups, and how to run them automatically.
 
 ## Initialize the repository
 
-You should have a separate repository for each system you intend to back up. Borg documentation indicates that it's possible to share a repository with multiple hosts, but not recommended.
+You should have a separate borg repository for each system you want to back up. Borg docs say that it's possible to share a repository with multiple hosts, but not recommended. 
+
+My laptop has a secondary drive that I am dedicating for backups, and I have mounted it at /backup. I'm going to create a repository called *borg-hostname*. My laptop's hostname is *p* because I like single-letter names.
 
 {{< highlight bash >}}
-sudo borg init --encryption=none /backup/borg-hostname
+sudo borg init --encryption=none /backup/borg-p
 {{< / highlight >}}
-
 ## Create an archive
 
-Whenever you want to back up your files, you create a new archive inside your repository. Deduplication makes it unnecessary to do incremental backups, because borg figures out which files have been changed and only stores one copy of each file.
+Whenever you want to back up your files, you create a new archive inside your repository. Deduplication makes incremental backups unnecessary. Just take a full backup every time, and borg figures out which files have been changed, only storing one copy of each file. Before deduplication, incremental backups were difficult to comprehend.
 
 Since this command takes up so many lines, I made a script file to contain it:
 
@@ -39,21 +40,23 @@ borg create --stats --progress \
     /backup/borg-p::{hostname}-{now:%Y-%m-%d} $ROOT_DIR
 {{< / highlight >}}
 
-## Test your backup
+Borg fills in *{hostname}* and  *{now:%Y-%m-%d}* with the hostname and date. You don't have to change them manually.
 
-Before going any further I think it's a good idea to see if that backup works. Create a new partition somewhere that you can boot from. If you need to resize your partitions to make room, you can boot [SystemRescue](https://www.system-rescue.org/Download/) from USB to do that.
+## Optional: test your backup
 
-The directory I mounted my new partition to is /mnt/test.
+Now try and restore the backup you just created. Create a new partition somewhere that you can boot from. If you need to resize your partitions to make room, you can boot 
+[SystemRescue](https://www.system-rescue.org/Download/) from USB to do that.
 
-borg-p is the name of my repository and p-2024-04-29 is the archive I created in the previous step.
-You have to cd into the target directory, there's no borg option to specify it.
+My new empty partition is mounted at /mnt/test.
+
+borg-p is the name of my repository and p-2024-04-29 is the archive I created in the previous step. You have to cd into the target directory first.
 
 ```
 cd /mnt/test
 sudo borg extract /backup/borg-p::p-2024-04-29
 ```
 
-Now it's important to edit /mnt/test/etc/fstab and update the UUID of the root filesystem to the new partition.
+Now edit /mnt/test/etc/fstab and update the UUID of the root filesystem to the new partition.
 
 This part varies a little bit depending on your boot loader configuration, but you'll want to copy your existing boot loader entry for Arch into a new entry, and change the UUID of root partition just like you did for fstab.
 
@@ -61,7 +64,7 @@ Reboot. If you're able to boot into the restored partition, great! Proceed to th
 
 ## Automate backups with borgmatic
 
-I'm actually not going to be using the one-line script I wrote in the previous section. That was just to demonstrate backing up manually without borgmatic, and test to see that it works.
+I'm actually not going to be using the borg script I wrote in the first section. That was just a test to make sure borg works. Instead of calling borg directly, I'm going to use borgmatic which will in turn call borg.
 
 To generate the default borgmatic config files, run:
 ```
@@ -104,6 +107,8 @@ By default this is run daily. You can change the interval by editing the timer:
 sudo systemctl edit borgmatic.timer
 ```
 
+## Offsite backups
+In this article, I backed up my files to another hard drive inside of my laptop. Ideally, I should be backing up to a drive that is not connected to my computer. Preferably over the network, because I don't want to plug in a USB drive manually every time. BorgBase has plans starting at $2/month, and that's what I'm planning on setting up soon.
 ## Resources
 - [Official borg documentation](https://borgbackup.readthedocs.io/en/stable/index.html)
 - [Borgmatic documentation](https://torsion.org/borgmatic/)

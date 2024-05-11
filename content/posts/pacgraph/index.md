@@ -46,3 +46,7 @@ alias pg='pacgraph -f /tmp/pacgraph && feh /tmp/pacgraph.svg'
 {{< / highlight >}}
 
 That can go in your ~/.bashrc or wherever else your aliases are stored.
+
+## Resources
+- [pacgraph github](https://github.com/keenerd/pacgraph) (hasn't been updated in a *long* time)
+- [pacgraph AUR package](https://aur.archlinux.org/packages/pacgraph)
