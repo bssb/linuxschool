@@ -18,7 +18,7 @@ sudo borg init --encryption=none /backup/borg-p
 {{< / highlight >}}
 ## Create an archive
 
-Whenever you want to back up your files, you create a new archive inside your repository. Deduplication makes incremental backups unnecessary. Just take a full backup every time, and borg figures out which files have been changed, only storing one copy of each file. Before deduplication, incremental backups were difficult to comprehend.
+Whenever you want to back up your files, you create a new archive inside your repository. Deduplication makes incremental backups unnecessary. Just take a full backup every time, and borg figures out which files have been changed, only storing one copy of each file. Before deduplication, incremental backups were complicated to set up.
 
 Since this command takes up so many lines, I made a script file to contain it:
 
@@ -93,7 +93,9 @@ patterns:
     - '- /var/lock/*'
 {{< / highlight >}}
 
-You can run borgmatic manually to create an archive:
+The first pattern is a recursive on the root directory. The rest of them are directories to exclude.
+
+You can run borgmatic manually to create an archive based on the above configuration:
 ```
 sudo borgmatic create
 ```
